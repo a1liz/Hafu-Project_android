@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hafu.Hafu.LoginActivity"
+    android:orientation="vertical"
+    android:background="#fffff1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background=""
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:background=""
+            android:text="X"
+            android:textColor="#00eaff"
+            android:textSize="18dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="登陆"
+            android:textSize="25dp"
+            android:textColor="#00eaff"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="Hiragino Sans GB"
+            />
+
+        <Button
+            android:id="@+id/forgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background=""
+            android:text="忘记密码?"
+            android:textSize="15dp"
+            android:textColor="#00eaff"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/hafu_logo"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/username"
+            android:layout_marginLeft="10dp"/>
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/password"
+            android:layout_marginLeft="10dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/remember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/remember"
+            android:layout_marginLeft="5dp"/>
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="新用户注册"
+            android:textColor="#939598"
+            android:layout_alignParentRight="true"
+            android:background=""
+            android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/hafu_background"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="登陆"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        />
+
+</LinearLayout>
