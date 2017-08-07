@@ -10,13 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background=""
         android:orientation="horizontal">
         <Button
             android:id="@+id/back"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:background=""
+            android:background="@android:color/transparent"
             android:text="X"
             android:textColor="#00eaff"
             android:textSize="18dp"
@@ -39,7 +38,7 @@
             android:id="@+id/forgetPassword"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background=""
+            android:background="@android:color/transparent"
             android:text="忘记密码?"
             android:textSize="15dp"
             android:textColor="#00eaff"
@@ -107,7 +106,7 @@
             android:text="新用户注册"
             android:textColor="#939598"
             android:layout_alignParentRight="true"
-            android:background=""
+            android:background="@android:color/transparent"
             android:layout_marginRight="10dp"/>
     </RelativeLayout>
 
