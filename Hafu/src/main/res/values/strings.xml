@@ -3,6 +3,7 @@
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="remember">记住密码</string>
+    <string name="mainname">饿死了me</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
