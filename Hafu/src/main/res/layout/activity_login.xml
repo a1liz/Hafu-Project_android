@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.hafu.Hafu.LoginActivity"
     android:orientation="vertical"
-    android:background="#fffff1">
+    android:background="#eeeeee">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -115,13 +115,12 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/hafu_background"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@drawable/hafu_background"
         android:text="登陆"
         android:textColor="#ffffff"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
 </LinearLayout>
