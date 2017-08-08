@@ -10,7 +10,9 @@
         android:layout_height="100dp"
         android:background="@drawable/hafu_background"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:clickable="true"
+        android:onClick="login">
 
         <com.hafu.Hafu.View.ImageViewPlus
             android:id="@+id/userIcon"
@@ -18,7 +20,7 @@
             android:layout_height="80dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/icon_test2" />
+            android:src="@drawable/notlogin" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,20 +35,16 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:text="用户10213123"
+                android:text="登录/注册"
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="5dp">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/anti_phone" />
 
                 <TextView
                     android:id="@+id/user_phonenumber"
@@ -54,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="3dp"
-                    android:text="133****0832"
+                    android:text="登录后享受更多特权"
                     android:textColor="#ffffff" />
             </LinearLayout>
 
@@ -70,9 +68,10 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:background="#ffffff"
-            android:text="10 元"
+            android:text="0 元"
             android:textSize="27dp"
             android:textColor="#fe9900"
+            android:clickable="false"
             />
         <Button
             android:id="@+id/coupons"
@@ -83,6 +82,7 @@
             android:textSize="27dp"
             android:textColor="#ff5f3e"
             android:background="#ffffff"
+            android:clickable="false"
             />
         <Button
             android:id="@+id/points"
@@ -92,16 +92,17 @@
             android:text="0 分"
             android:textSize="27dp"
             android:textColor="#6ac20b"
-            android:background="#ffffff"/>
+            android:background="#ffffff"
+            android:clickable="false"
+            />
 
     </LinearLayout>
 
-
     <Button
-        android:id="@+id/edit_address"
+        android:id="@+id/contact_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_address"
+        android:text="联系我们"
         android:textAlignment="textStart"
         android:background="#ffffff"
         android:layout_marginTop="5dp"
@@ -112,15 +113,15 @@
         android:layout_height="wrap_content"
         android:text="@string/about_us"
         android:textAlignment="textStart"
-        android:background="#ffffff"/>
+        android:background="#ffffff" />
     <Button
-        android:id="@+id/logout"
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/logout"
+        android:text="点此登录"
         android:textColor="@android:color/holo_red_light"
         android:background="#ffffff"
-        android:onClick="logout"/>
+        android:onClick="login"/>
 
 </LinearLayout>
