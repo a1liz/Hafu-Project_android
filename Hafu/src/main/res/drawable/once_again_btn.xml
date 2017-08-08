@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:useLevel="false">
+    <solid android:color="@android:color/transparent"/>
+    <corners android:topLeftRadius="2dip"
+        android:topRightRadius="2dip"
+        android:bottomRightRadius="2dip"
+        android:bottomLeftRadius="2dip" />
+    <!--圆角矩形白色背景-->
+    <!--<padding android:left="1dp"-->
+    <!--android:right="1dp"-->
+    <!--android:bottom="1dp"/>-->
+
+    <stroke android:width="0.1dp"
+        android:color="#0097ff"
+        />
+    <!--边框宽度-->
+    <size android:width="10dp"
+        android:height="10dp"
+        />
+    <!--边框-->
+</shape>
