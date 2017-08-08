@@ -63,12 +63,15 @@ public class MainActivity extends Activity {
         linearLayout = (LinearLayout) findViewById(R.id.topContainer);
         from = LayoutInflater.from(MainActivity.this);
         view = from.inflate(R.layout.main_profile,linearLayout);
+        view.setVisibility(View.GONE);
 
         mTextMessage = (TextView) findViewById(R.id.message);
 
         // 引入底部导航栏
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
 
         edit_address = view.findViewById(R.id.edit_address);
         about_us = view.findViewById(R.id.about_us);
