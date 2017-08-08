@@ -1,4 +1,4 @@
-package com.hafu.Hafu;
+package com.hafu.Hafu.activity;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.hafu.Hafu.R;
 
 import org.xutils.view.annotation.ViewInject;
 

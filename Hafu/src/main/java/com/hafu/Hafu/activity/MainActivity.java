@@ -28,11 +28,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hafu.Hafu.OrderDetailActivity;
 import com.hafu.Hafu.R;
 import com.hafu.Hafu.view.CircleImageView;
-
-import org.xutils.view.annotation.ViewInject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -75,16 +72,12 @@ public class MainActivity extends Activity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setVisibility(View.VISIBLE);
-                    mTextMessage.setText(R.string.title_home);
-                    totalView.setVisibility(View.GONE);
+                    getHomePageView();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setVisibility(View.GONE);
                     getCartView();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setVisibility(View.GONE);
                     getProfileView();
                     return true;
             }
@@ -103,14 +96,15 @@ public class MainActivity extends Activity {
         from = LayoutInflater.from(MainActivity.this);
         totalView = from.inflate(R.layout.main_profile,linearLayout);
         totalView.setVisibility(View.GONE);
+        getHomePageView();
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+//        mTextMessage = (TextView) findViewById(R.id.message);
 
         // 获取缓存内容
         sp = getSharedPreferences("msg",MODE_PRIVATE);
         String user = sp.getString("username","");
         String isLogin = sp.getString("isLogin","");
-        mTextMessage.setText(user+isLogin);
+//        mTextMessage.setText(user+isLogin);
 
 
         // 引入底部导航栏
@@ -118,6 +112,14 @@ public class MainActivity extends Activity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    /**
+     * 获取主页面
+     */
+    private void getHomePageView() {
+        linearLayout.removeAllViews();
+        totalView.setVisibility(View.VISIBLE);
+        totalView = from.inflate(R.layout.home_page,linearLayout);
+    }
 
     /**
      * 获取个人详情页面

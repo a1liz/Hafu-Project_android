@@ -28,6 +28,8 @@
             <item android:bottom="4.0dip" android:right="4.0dip">
                 <shape>
                     <solid android:color="#ffffff"/>
+                    <corners android:bottomLeftRadius="3dp"></corners>
+                    <corners android:bottomRightRadius="3dp"></corners>
                 </shape>
             </item>
         </layer-list>
