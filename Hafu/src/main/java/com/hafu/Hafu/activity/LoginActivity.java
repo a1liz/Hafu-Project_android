@@ -1,4 +1,4 @@
-package com.hafu.Hafu;
+package com.hafu.Hafu.activity;
 
 import android.app.Activity;
 
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 
+import com.hafu.Hafu.R;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 

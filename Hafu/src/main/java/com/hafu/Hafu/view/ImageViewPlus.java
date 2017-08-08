@@ -1,4 +1,4 @@
-package com.hafu.Hafu.View;
+package com.hafu.Hafu.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;

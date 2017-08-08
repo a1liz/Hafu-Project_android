@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <com.hafu.Hafu.View.ImageViewPlus
+        <com.hafu.Hafu.view.ImageViewPlus
             android:id="@+id/userIcon"
             android:layout_width="80dp"
             android:layout_height="80dp"

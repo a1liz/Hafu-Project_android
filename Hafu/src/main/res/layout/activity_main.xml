@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hafu.Hafu.MainActivity">
+    tools:context="com.hafu.Hafu.activity.MainActivity">
 
     <LinearLayout
         android:id="@+id/topContainer"
