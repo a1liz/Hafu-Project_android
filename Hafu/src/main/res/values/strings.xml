@@ -12,4 +12,5 @@
     <string name="edit_address">修改地址</string>
     <string name="point">积分</string>
     <string name="logout">退出登录</string>
+    <string name="contact_us">联系我们</string>
 </resources>
