@@ -8,4 +8,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="about_us">关于我们</string>
+    <string name="edit_address">修改地址</string>
+    <string name="point">积分</string>
+    <string name="logout">退出登录</string>
 </resources>

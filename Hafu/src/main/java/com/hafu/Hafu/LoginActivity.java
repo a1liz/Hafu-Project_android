@@ -2,17 +2,16 @@ package com.hafu.Hafu;
 
 import android.app.Activity;
 
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
-import com.romainpiel.shimmer.Shimmer;
-import com.romainpiel.shimmer.ShimmerTextView;
+
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -23,8 +22,6 @@ import org.xutils.x;
 public class LoginActivity extends Activity {
     ShimmerTextView tv;
     Shimmer shimmer;
-
-
 
 
     @ViewInject(R.id.username)
@@ -38,7 +35,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        tv = (ShimmerTextView) findViewById(R.id.shimmer_mainname);
+        tv = findViewById(R.id.shimmer_mainname);
 //
 //        AssetManager mgr=getAssets();//得到AssetManager
 //        Typeface tf=Typeface.createFromAsset(mgr, "fonts/bole.ttf");//根据路径得到Typeface
@@ -49,6 +46,7 @@ public class LoginActivity extends Activity {
 
         //以上为字体失败部分
         shimmer = new Shimmer();    //启动字体闪烁
+        Log.i("--->","闪烁开始");
         shimmer.start(tv);
 
         x.view().inject(this);
