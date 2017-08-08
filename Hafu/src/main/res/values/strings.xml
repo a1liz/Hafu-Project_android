@@ -13,4 +13,7 @@
     <string name="point">积分</string>
     <string name="logout">退出登录</string>
     <string name="contact_us">联系我们</string>
+    <string name="pop_photo">拍照</string>
+    <string name="pop_choose">从相册中选择</string>
+    <string name="pop_close">取消</string>
 </resources>
