@@ -3,6 +3,7 @@ package com.hafu.Hafu.activity;
 import android.app.Activity;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,8 +72,13 @@ public class LoginActivity extends Activity {
 
     @Event(value = {R.id.login})
     public void doEvent(View view) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("username",username.getText().toString());
+        editor.putString("isLogin","TRUE");
+        editor.commit();
 
-
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 
 
