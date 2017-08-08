@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:layout_marginTop="5dp">
         <ImageView
             android:id="@+id/item_img"
             android:layout_width="50dp"
@@ -54,6 +55,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/item_status"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -75,12 +77,14 @@
             android:src="@drawable/di10"
             android:layout_marginLeft="15dp"/>
         <TextView
+            android:id="@+id/item_good_details"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="星冰乐 等2件商品"
             android:layout_toRightOf="@id/item_good_img"
             android:gravity="center_vertical"/>
         <TextView
+            android:id="@+id/item_good_price"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="¥32"
@@ -96,7 +100,7 @@
         android:layout_marginTop="1dp">
         <Button
             android:id="@+id/evaluation"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_alignParentEnd="true"
@@ -107,6 +111,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             />
         <Button
             android:id="@+id/once_again"

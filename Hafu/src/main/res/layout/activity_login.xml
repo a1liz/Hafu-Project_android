@@ -27,7 +27,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="登陆"
+            android:text="登录"
             android:textSize="25dp"
             android:textColor="#00eaff"
             android:layout_centerInParent="true"
@@ -83,7 +83,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/username"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:inputType="text"
+            />
     </LinearLayout>
 
     <LinearLayout
