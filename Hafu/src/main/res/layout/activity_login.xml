@@ -22,7 +22,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="15dp"
             android:layout_alignParentLeft="true"
-            android:onClick="back"/>
+            android:onClick="exitToHome"/>
 
         <TextView
             android:id="@+id/textView"
