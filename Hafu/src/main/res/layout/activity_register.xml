@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hafu.Hafu.LoginActivity"
+    tools:context="com.hafu.Hafu.activity.RegisterActivity"
     android:orientation="vertical"
     android:background="#fffff1">
 
@@ -106,7 +106,7 @@
 >
 
             <EditText
-                android:id="@+id/et_phoneCodes"
+                android:id="@+id/Codes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -116,17 +116,13 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/iv_showCode"
+
+            android:id="@+id/showCode"
             android:layout_width="100dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="50dp"
             android:layout_height="match_parent" />
 
     </LinearLayout>
-
-
-
-
-
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"

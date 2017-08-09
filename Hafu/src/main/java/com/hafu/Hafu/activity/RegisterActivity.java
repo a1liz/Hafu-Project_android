@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        showCode = (ImageView) findViewById(R.id.iv_showCode);
+        showCode = (ImageView) findViewById(R.id.showCode);
         //将验证码用图片的形式显示出来
         showCode.setImageBitmap(VerificationCode.getInstance().createBitmap());
         realCode = VerificationCode.getInstance().getCode().toLowerCase();
