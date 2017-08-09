@@ -107,7 +107,8 @@ public class MainActivity extends Activity {
         totalView.setVisibility(View.GONE);
         getHomePageView();
 
-//        mTextMessage = (TextView) findViewById(R.id.message);
+        mTextMessage = (TextView) findViewById(R.id.message);
+        mTextMessage.setVisibility(View.GONE);
 
         // 获取缓存内容
         sp = getSharedPreferences("msg",MODE_PRIVATE);
