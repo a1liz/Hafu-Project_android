@@ -6,7 +6,7 @@
                 android:left="4.0dip"
                 android:top="4.0dip">
                 <shape>
-                    <solid android:color="#ffffff"/>
+                    <solid android:color="#eeeeee"/>
                 </shape>
             </item>
         </layer-list>
@@ -18,7 +18,7 @@
                 android:left="4.0dip"
                 android:top="4.0dip">
                 <shape>
-                    <solid android:color="#ffffff"/>
+                    <solid android:color="#eeeeee"/>
                 </shape>
             </item>
         </layer-list>

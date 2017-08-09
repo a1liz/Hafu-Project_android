@@ -1,6 +1,7 @@
 package com.hafu.Hafu.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -18,8 +19,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Checkable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -28,6 +33,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hafu.Hafu.HafuAdapter;
 import com.hafu.Hafu.R;
 import com.hafu.Hafu.view.CircleImageView;
 
@@ -37,6 +43,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 
 public class MainActivity extends Activity {
 
@@ -45,7 +54,7 @@ public class MainActivity extends Activity {
     private TextView mTextMessage;
     private SharedPreferences sp;
     private LinearLayout linearLayout;
-    private ListView order_list;
+    private ListView order_list,store_list;
 
     private CircleImageView ivHead;
     private RelativeLayout layout_choose;
@@ -76,14 +85,6 @@ public class MainActivity extends Activity {
                     return true;
                 case R.id.navigation_dashboard:
                     getCartView();
-                    order_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Log.i("info","===>onItemClick函数被触发");
-                            Intent intent = new Intent(MainActivity.this,OrderDetailActivity.class);
-                            startActivity(intent);
-                        }
-                    });
                     return true;
                 case R.id.navigation_notifications:
                     getProfileView();
@@ -127,6 +128,56 @@ public class MainActivity extends Activity {
         linearLayout.removeAllViews();
         totalView.setVisibility(View.VISIBLE);
         totalView = from.inflate(R.layout.home_page,linearLayout);
+
+        List<Map<String,Object>> lists = new ArrayList<>();
+        int[] imgIDs = {R.drawable.star,R.drawable.pizza,R.drawable.ha};
+        String[] titles = {"星巴克","必胜客","哈根达斯"};
+        float[] ratings = {4.5f,5f,4f};
+        int[] eva_per_months = {39,42,68};
+        int[] number_per_months = {60,79,75};
+        String[] distances = {"2.43公里","700米","3.6公里"};
+        int[] min_prices = {30,45,40};
+        int[] extra_prices = {5,3,10};
+        Boolean[] zhuans = {TRUE,Boolean.FALSE, TRUE};
+        Boolean[] sus = {TRUE,Boolean.FALSE,Boolean.FALSE};
+        Boolean[] piao = {TRUE,Boolean.FALSE, TRUE};
+        Boolean[] joinMans = {TRUE, TRUE,Boolean.FALSE};
+        int[] man_totals = {20,30,0};
+        int[] man_salls = {5,8,0};
+        int[] dis = {10,0,20};
+
+        for(int i = 0; i < imgIDs.length; i++) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("img",imgIDs[i]);
+            map.put("title",titles[i]);
+            map.put("rating",ratings[i]);
+            map.put("eva_per_month",eva_per_months[i]);
+            map.put("number_per_month",number_per_months[i]);
+            map.put("distance",distances[i]);
+            map.put("min_price","¥"+min_prices[i]);
+            map.put("extra_price","¥"+extra_prices[i]);
+            map.put("zhuan",zhuans[i]);
+            map.put("su",sus[i]);
+            map.put("piao",piao[i]);
+            map.put("man_total",joinMans[i]);
+            map.put("man","满"+man_totals[i]+"元立减"+man_salls[i]+"元");
+            if(dis[i] != 0) {
+                map.put("di_total",TRUE);
+            } else {
+                map.put("di_total",FALSE);
+            }
+            map.put("di","在该商家是用抵金券订餐可抵"+dis[i]+"元");
+
+            lists.add(map);
+        }
+
+        store_list = totalView.findViewById(R.id.store_list);
+        String[] key = {"img","title","rating","eva_per_month","number_per_month","distance","min_price","extra_price","zhuan","su","piao","man_total","man","di_total","di"};
+        int[] ids = {R.id.item_img,R.id.item_title,R.id.item_rating,R.id.item_eva_per_month,R.id.item_number_per_month,R.id.item_distance,R.id.item_min_price,R.id.item_extra_price,R.id.item_zhuan,R.id.item_su,R.id.item_piao,R.id.item_man_total,R.id.item_man,R.id.item_di_total,R.id.item_di};
+        HafuAdapter hafuAdapter = new HafuAdapter(this,lists,R.layout.store_item,key,ids);
+
+
+        store_list.setAdapter(hafuAdapter);
     }
 
     /**
@@ -209,7 +260,14 @@ public class MainActivity extends Activity {
         int[] ids = {R.id.item_img,R.id.item_title,R.id.item_time,R.id.item_status,R.id.item_good_img,R.id.item_good_details,R.id.item_good_price};
         SimpleAdapter simpleAdapter = new SimpleAdapter(totalView.getContext(),lists,R.layout.order_list_item,key,ids);
         order_list.setAdapter(simpleAdapter);
-
+        order_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("info","===>onItemClick函数被触发");
+                Intent intent = new Intent(MainActivity.this,OrderDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**

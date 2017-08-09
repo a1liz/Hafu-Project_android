@@ -16,5 +16,5 @@
     <string name="pop_photo">拍照</string>
     <string name="pop_choose">从相册中选择</string>
     <string name="pop_close">取消</string>
-    <string name="number_hint"><![CDATA[< 数量：]]></string>
+    <string name="number_hint"><![CDATA[< 数量:]]></string>
 </resources>

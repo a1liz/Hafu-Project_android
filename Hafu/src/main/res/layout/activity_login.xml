@@ -21,7 +21,8 @@
             android:textColor="#00eaff"
             android:textSize="18dp"
             android:layout_marginLeft="15dp"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:onClick="back"/>
 
         <TextView
             android:id="@+id/textView"
