@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -18,7 +19,6 @@ import java.util.Map;
 
 public class OrderDetailActivity extends Activity {
 
-    @ViewInject(R.id.order_detail_list)
     private ListView order_detail_list;
 
     @Override
@@ -26,6 +26,7 @@ public class OrderDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         Log.i("info","开始orderDetailActivity");
+        order_detail_list = findViewById(R.id.order_detail_list);
         List<Map<String,Object>> lists = new ArrayList<>();
         int[] imgIDs = {R.drawable.di7,R.drawable.di8,R.drawable.di9,R.drawable.di10,R.drawable.di11};
         String[] titles = {"薯条","香辣鸡腿堡","吉士汉堡","雪顶咖啡","老北京鸡肉卷"};
@@ -42,10 +43,13 @@ public class OrderDetailActivity extends Activity {
 
         String[] key = {"img","title","number","price"};
         int[] ids = {R.id.item_img,R.id.item_title,R.id.item_number,R.id.item_price};
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this,lists,R.id.order_detail_list,key,ids);
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this,lists,R.layout.order_detail_list_item,key,ids);
         order_detail_list.setAdapter(simpleAdapter);
     }
 
+    public void back(View view) {
+        onBackPressed();
+    }
 
 
 }

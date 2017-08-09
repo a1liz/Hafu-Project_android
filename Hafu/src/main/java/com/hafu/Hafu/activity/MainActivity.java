@@ -76,6 +76,14 @@ public class MainActivity extends Activity {
                     return true;
                 case R.id.navigation_dashboard:
                     getCartView();
+                    order_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Log.i("info","===>onItemClick函数被触发");
+                            Intent intent = new Intent(MainActivity.this,OrderDetailActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     return true;
                 case R.id.navigation_notifications:
                     getProfileView();
@@ -201,14 +209,7 @@ public class MainActivity extends Activity {
         int[] ids = {R.id.item_img,R.id.item_title,R.id.item_time,R.id.item_status,R.id.item_good_img,R.id.item_good_details,R.id.item_good_price};
         SimpleAdapter simpleAdapter = new SimpleAdapter(totalView.getContext(),lists,R.layout.order_list_item,key,ids);
         order_list.setAdapter(simpleAdapter);
-        order_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("info","===>onItemClick函数被触发");
-                Intent intent = new Intent(MainActivity.this,OrderDetailActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     /**

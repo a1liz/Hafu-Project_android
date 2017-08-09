@@ -16,6 +16,7 @@
     <ListView
         android:id="@+id/order_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
     </ListView>
 </LinearLayout>
