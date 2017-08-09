@@ -25,7 +25,7 @@
     </item>
     <item>
         <layer-list>
-            <item android:bottom="4.0dip" android:right="4.0dip">
+            <item android:bottom="1.0dip" android:right="4.0dip">
                 <shape>
                     <solid android:color="#ffffff"/>
                 </shape>
