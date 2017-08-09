@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_all"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#eeeeee">
 
@@ -12,13 +14,23 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <com.hafu.Hafu.View.ImageViewPlus
+        <!--<com.hafu.Hafu.view.CircleImageView-->
+            <!--android:id="@+id/userIcon"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/icon_test2"-->
+            <!--android:onClick="editIcon"/>-->
+        <com.hafu.Hafu.view.CircleImageView
             android:id="@+id/userIcon"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            app:outCircleWidth="5dp"
+            app:outCircleColor="#990066"
+            android:src="@drawable/icon_test2"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/icon_test2" />
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -63,51 +75,169 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#ffffff">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#ffffff"
-            android:text="余额"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="优惠券"
-            android:background="#ffffff"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="积分"
-            android:background="#ffffff"/>
+            android:clickable="true"
 
+            android:layout_weight="0.3"
+            android:orientation="vertical"
+            android:background="@drawable/shadow">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/remained_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textStyle="bold"
+                    android:textColor="#fe9900"
+                    android:textSize="27dp"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元"
+                    android:textColor="#fe9900"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="余额"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:layout_weight="0.3"
+            android:orientation="vertical"
+            android:background="@drawable/shadow">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/coupons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textColor="#ff5f3e"
+                    android:textSize="27dp"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="张"
+                    android:textColor="#ff5f3e"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="优惠券"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:layout_weight="0.3"
+            android:orientation="vertical"
+            android:background="@drawable/shadow">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textColor="#6ac20b"
+                    android:textSize="27dp"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分"
+                    android:textColor="#6ac20b"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="积分"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="      修改地址"
-        android:textAlignment="textStart"
-        android:background="#ffffff"
-        />
-    <Button
-        android:id="@+id/about"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:background="@drawable/shadow"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pin"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_address"
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="      关于我们"
-        android:textAlignment="textStart"
-        android:background="#ffffff"/>
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:background="@drawable/shadow"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:src="@drawable/info"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_us"
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            />
+    </LinearLayout>
     <Button
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="退出登录"
+        android:text="@string/logout"
         android:textColor="@android:color/holo_red_light"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:onClick="logout"/>
 
 </LinearLayout>

@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hafu.Hafu.LoginActivity"
+    tools:context="com.hafu.Hafu.activity.LoginActivity"
     android:orientation="vertical"
     android:background="#eeeeee">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#ffffff">
         <Button
             android:id="@+id/back"
             android:layout_width="20dp"
@@ -20,13 +21,14 @@
             android:textColor="#00eaff"
             android:textSize="18dp"
             android:layout_marginLeft="15dp"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:onClick="exitToHome"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="登陆"
+            android:text="登录"
             android:textSize="25dp"
             android:textColor="#00eaff"
             android:layout_centerInParent="true"
@@ -51,12 +53,11 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:src="@drawable/hafu_logo"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"/>
 
     <com.romainpiel.shimmer.ShimmerTextView
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:id="@+id/shimmer_mainname"
         android:text="@string/mainname"
         android:layout_width="wrap_content"
@@ -64,30 +65,35 @@
         android:textColor="#444"
         android:textSize="50sp"
         android:layout_gravity="center"
-        style="@style/MyTextView"/>
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
 
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="match_parent"
             android:src="@drawable/username"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp" />
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:inputType="text"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
         <ImageView
             android:layout_width="20dp"
             android:layout_height="match_parent"
@@ -106,7 +112,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
         <CheckBox
             android:id="@+id/remember"
             android:layout_width="wrap_content"
@@ -135,6 +142,7 @@
         android:background="@drawable/hafu_background"
         android:text="登陆"
         android:textColor="#ffffff"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:onClick="doEvent"/>
 
 </LinearLayout>
