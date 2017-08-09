@@ -1,37 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true">
-        <layer-list>
-            <item
-                android:left="4.0dip"
-                android:top="4.0dip">
-                <shape>
-                    <solid android:color="#ffffff"/>
-                </shape>
-            </item>
-        </layer-list>
-    </item>
-    <item
-        android:state_pressed="true">
-        <layer-list>
-            <item
-                android:left="4.0dip"
-                android:top="4.0dip">
-                <shape>
-                    <solid android:color="#ffffff"/>
-                </shape>
-            </item>
-        </layer-list>
-    </item>
-    <item>
-        <layer-list>
-            <item android:bottom="4.0dip" android:right="4.0dip">
-                <shape>
-                    <solid android:color="#ffffff"/>
-                    <corners android:bottomLeftRadius="3dp"></corners>
-                    <corners android:bottomRightRadius="3dp"></corners>
-                </shape>
-            </item>
-        </layer-list>
-    </item>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:useLevel="false">
+    <solid android:color="#ffffff"/>
+    <corners android:topLeftRadius="5dip"
+        android:topRightRadius="5dip"
+        android:bottomRightRadius="5dip"
+        android:bottomLeftRadius="5dip" />
+</shape>
