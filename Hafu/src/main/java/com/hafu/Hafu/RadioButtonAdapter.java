@@ -101,7 +101,7 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
 
         final RadioButton radio=(RadioButton) v.findViewById(R.id.isPrimaryAddress);
         holder.isPrimaryAddress = radio;
-
+        holder.address_item = v.findViewById(R.id.address_item);
 
 //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中
         holder.isPrimaryAddress.setOnClickListener(new View.OnClickListener() {
@@ -134,8 +134,11 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
             res = true;
 
         holder.isPrimaryAddress.setChecked(res);
-
-
+//        if (res) {
+//            holder.address_item.setBackgroundResource(R.drawable.accent_btn);
+//        } else {
+//            holder.address_item.setBackgroundResource(R.color.base_color_text_white);
+//        }
         // 这个方法是核心
         bindView(position, v);
 
@@ -196,7 +199,11 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
 //                        }
                         if (data instanceof Boolean) {
                             ((Checkable) v).setChecked((Boolean) data);
-
+                            if ((Boolean) data) {
+                                view.findViewById(R.id.address_item).setBackgroundResource(R.drawable.accent_btn);
+                            } else {
+                                view.findViewById(R.id.address_item).setBackgroundResource(R.color.base_color_text_white);
+                            }
                             //如果不是CheckBox，那么判断是不是继承TextView的CheckedTextView，是的话赋值，不是就抛出异常
                         } else if (v instanceof TextView) {
                             setViewText((TextView) v, text);
@@ -352,6 +359,7 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
     static private class ViewHolder {
         TextView pid;
         RadioButton isPrimaryAddress;
+        LinearLayout address_item;
     }
 
 }
