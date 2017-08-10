@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     tools:context="com.hafu.Hafu.activity.LoginActivity"
     android:orientation="vertical"
-    android:background="#eeeeee">
+    android:background="#fffff1">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="#ffffff">
+        android:orientation="horizontal">
         <Button
             android:id="@+id/back"
             android:layout_width="20dp"
@@ -69,8 +68,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:layout_height="wrap_content">
 
 
         <ImageView
@@ -92,8 +90,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_width="20dp"
             android:layout_height="match_parent"
@@ -108,12 +105,32 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp">
+        <EditText
+            android:id="@+id/codes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="请输入右侧验证码"
+            android:inputType="text"
+            android:maxLines="1"/>
+        <ImageView
+        android:id="@+id/showCode"
+        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:onClick="codeChange" />
+</LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:layout_height="wrap_content">
         <CheckBox
             android:id="@+id/remember"
             android:layout_width="wrap_content"
@@ -128,7 +145,8 @@
             android:textColor="#939598"
             android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:onClick="signup"/>
     </RelativeLayout>
 
 
@@ -140,9 +158,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/hafu_background"
-        android:text="登陆"
+        android:text="登录"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        android:onClick="doEvent"/>
+        android:onClick="login"/>
 
 </LinearLayout>

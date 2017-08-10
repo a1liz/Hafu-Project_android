@@ -278,7 +278,6 @@ public class MainActivity extends Activity {
     public void logout(View view) {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("isLogin","FALSE");
-        editor.putString("username","");
         editor.commit();
         linearLayout.removeAllViews();
         getProfileView();
@@ -288,7 +287,7 @@ public class MainActivity extends Activity {
      * 登录动作
      * @param view
      */
-    public void login(View view) {
+    public void turnToLogin(View view) {
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
         startActivity(intent);
     }

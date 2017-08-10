@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Hafu</string>
-    <string name="username">用户名</string>
+    <string name="username">用户名/手机号</string>
     <string name="password">密码</string>
     <string name="remember">记住密码</string>
     <string name="mainname">饿死了me</string>
@@ -17,4 +17,6 @@
     <string name="pop_choose">从相册中选择</string>
     <string name="pop_close">取消</string>
     <string name="number_hint"><![CDATA[< 数量:]]></string>
+    <string name="username0">用户名</string>
+    <string name="ip">192.168.1.135</string>
 </resources>

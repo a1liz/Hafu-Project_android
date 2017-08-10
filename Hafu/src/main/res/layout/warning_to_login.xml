@@ -24,6 +24,6 @@
         android:text="登录"
         android:textSize="18dp"
         android:layout_marginTop="10dp"
-        android:onClick="login"/>
+        android:onClick="turnToLogin"/>
 
 </LinearLayout>
