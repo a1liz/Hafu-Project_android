@@ -5,14 +5,23 @@
     android:orientation="vertical"
     android:background="#eeeeee">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="历史订单"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="#ffffff"/>
+        android:layout_height="40dp"
+        android:background="#ffffff"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="历史订单"
+            android:textColor="#13beec"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            />
+    </RelativeLayout>
     <ListView
         android:id="@+id/order_list"
         android:layout_width="wrap_content"

@@ -29,7 +29,6 @@
             android:text="订单详情"
             android:textColor="#13beec"
             android:textSize="25dp"
-            android:textStyle="bold"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"

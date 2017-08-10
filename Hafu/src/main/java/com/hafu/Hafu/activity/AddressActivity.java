@@ -149,4 +149,8 @@ public class AddressActivity extends Activity {
         }
     };
 
+    public void back(View view) {
+        onBackPressed();
+    }
+
 }
