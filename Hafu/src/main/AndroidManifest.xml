@@ -24,9 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.OrderDetailActivity" />
-        <activity android:name=".activity.RegisterActivity">
-
-        </activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.AddressActivity"></activity>
     </application>
 
 </manifest>

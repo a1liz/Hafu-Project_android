@@ -190,25 +190,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:clickable="true"
+        android:layout_marginTop="15dp"
         android:background="@drawable/shadow"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:clickable="true"
+        android:onClick="editAddress"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="30dp"
-            android:src="@drawable/pin"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_gravity="center"/>
+            android:src="@drawable/pin" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit_address"
-            android:textSize="18dp"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            />
+            android:text="@string/edit_address"
+            android:textSize="18dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"

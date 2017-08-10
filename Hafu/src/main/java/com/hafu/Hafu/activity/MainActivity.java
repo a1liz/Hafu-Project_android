@@ -342,6 +342,15 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * 管理地址动作
+     * @param view
+     */
+    public void editAddress(View view) {
+        Intent intent = new Intent(MainActivity.this,AddressActivity.class);
+        startActivity(intent);
+    }
+
     // 头像选择部分
     PopupWindow avatorPop;
     private void showMyDialog() {
