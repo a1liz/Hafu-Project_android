@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,11 +37,21 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hafu.Hafu.HafuAdapter;
+import com.hafu.Hafu.ImageService;
 import com.hafu.Hafu.R;
 import com.hafu.Hafu.view.CircleImageView;
 
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,9 +66,12 @@ public class MainActivity extends Activity {
     private LayoutInflater from;
     private View totalView;
     private TextView mTextMessage;
+    private TextView user;
+    private TextView user_phonenumber;
     private SharedPreferences sp;
     private LinearLayout linearLayout;
     private ListView order_list,store_list;
+    private byte[] data;
 
     private CircleImageView ivHead;
     private RelativeLayout layout_choose;
@@ -87,7 +104,11 @@ public class MainActivity extends Activity {
                     getCartView();
                     return true;
                 case R.id.navigation_notifications:
-                    getProfileView();
+                    try {
+                        getProfileView();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     return true;
             }
             return false;
@@ -184,14 +205,37 @@ public class MainActivity extends Activity {
     /**
      * 获取个人详情页面
      */
-    private void getProfileView() {
+    private void getProfileView() throws IOException {
         linearLayout.removeAllViews();
         totalView.setVisibility(View.VISIBLE);
         if (sp.getString("isLogin","").equals("TRUE")) {
             totalView = from.inflate(R.layout.main_profile,linearLayout);
 
             ivHead = (CircleImageView) totalView.findViewById(R.id.userIcon);
+
             layout_all = (LinearLayout) totalView.findViewById(R.id.layout_all);
+
+            user = totalView.findViewById(R.id.user);
+            user_phonenumber = totalView.findViewById(R.id.user_phonenumber);
+
+            user.setText(sp.getString("username",""));
+            user_phonenumber.setText(sp.getString("regphone",""));
+
+            try {
+                if (JSON.parseArray(sp.getString("iconStream", "")).get(0).equals("FALSE")) {
+                    Log.i("从网络中获取图片====>","成功");
+                    new Thread(networkTask).start();
+                }
+                else if (JSON.parseArray(sp.getString("iconStream", "")).get(0).equals("TRUE")) {
+                    Log.i("从缓存中获取图片====>","成功");
+                    JSONArray jsonArray = JSONArray.parseArray(sp.getString("iconStream", ""));
+                    data = Base64.decode(jsonArray.get(1).toString(),Base64.CRLF);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);  //生成位图
+                    ivHead.setImageBitmap(bitmap);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             ivHead.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -206,9 +250,11 @@ public class MainActivity extends Activity {
         } else if (sp.getString("isLogin","").equals("FALSE")) {
             totalView = from.inflate(R.layout.waiting_for_login,linearLayout);
         } else {
-            totalView.setVisibility(View.GONE);
-            mTextMessage.setVisibility(View.VISIBLE);
-            mTextMessage.setText("isLogin错误");
+            totalView = from.inflate(R.layout.waiting_for_login,linearLayout);
+
+//            totalView.setVisibility(View.GONE);
+//            mTextMessage.setVisibility(View.VISIBLE);
+//            mTextMessage.setText("isLogin错误");
         }
     }
 
@@ -226,9 +272,10 @@ public class MainActivity extends Activity {
             Log.i("warning","==>未登录，不可查看购物车");
             return;
         } else {
-            totalView.setVisibility(View.GONE);
-            mTextMessage.setVisibility(View.VISIBLE);
-            mTextMessage.setText("isLogin错误");
+            totalView = from.inflate(R.layout.warning_to_login,linearLayout);
+//            totalView.setVisibility(View.GONE);
+//            mTextMessage.setVisibility(View.VISIBLE);
+//            mTextMessage.setText("isLogin错误");
             Log.i("error","==>缓存isLogin部分错误");
             return;
         }
@@ -275,9 +322,12 @@ public class MainActivity extends Activity {
      * 注销动作
      * @param view
      */
-    public void logout(View view) {
+    public void logout(View view) throws IOException {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("isLogin","FALSE");
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(0,"FALSE");
+        editor.putString("iconStream",jsonArray.toString());
         editor.commit();
         linearLayout.removeAllViews();
         getProfileView();
@@ -473,5 +523,55 @@ public class MainActivity extends Activity {
         startActivityForResult(intent,REQUESTCODE_CUT);
 
     }
+
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data1 = msg.getData();
+            String val = data1.getString("value");
+            Log.i("mylog", "头像获取请求结果为-->" + val);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);  //生成位图
+            ivHead.setImageBitmap(bitmap);
+            SharedPreferences.Editor editor = sp.edit();
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.add(0,"TRUE");
+            jsonArray.add(1, Base64.encodeToString(data,Base64.CRLF));
+            Log.i("存入的图片data数组:","===>"+jsonArray.toString());
+            editor.putString("iconStream",jsonArray.toString());
+            editor.commit();
+            // TODO
+            // UI界面的更新等相关操作
+        }
+    };
+
+    /**
+     * 网络操作相关的子线程
+     */
+    Runnable networkTask = new Runnable() {
+
+        @Override
+        public void run() {
+            // TODO
+            // 在这里进行 http request.网络请求相关操作
+            // "http://" + getString(R.string.ip) + ":8080/hafu_project/images/"+sp.getString("icon","")
+            try {
+                data = ImageService.getImage(
+                        "http://" + getString(R.string.ip) + ":8080/hafu_project/images/"+sp.getString("icon","")
+                );
+                 //显示图片
+            } catch (IOException e) {
+                Toast.makeText(MainActivity.this, "网络连接超时", Toast.LENGTH_LONG).show();  //通知用户连接超时信息
+                e.printStackTrace();
+            }
+
+            Message msg = new Message();
+            Bundle data = new Bundle();
+            data.putString("value", "完成头像获取");
+            msg.setData(data);
+            handler.sendMessage(msg);
+        }
+    };
 
 }

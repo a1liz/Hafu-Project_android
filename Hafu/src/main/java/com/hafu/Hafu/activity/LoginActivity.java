@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.hafu.Hafu.R;
 import com.hafu.Hafu.domain.HafuUserComment;
 import com.hafu.Hafu.view.VerificationCode;
@@ -66,29 +67,40 @@ public class LoginActivity extends Activity {
             if(msg.what == 1) {
                 String result = (String) msg.obj;
                 Log.i("登录返回值结果：",result);
-                JSONArray jsonArray = JSON.parseArray(result);
-                SharedPreferences.Editor editor = sp.edit();
-                Log.i("jsonArray的值:",jsonArray.get(0).toString());
-                if (jsonArray.get(0).toString().equals("FALSE")) {
-                    editor.putString("isLogin","FALSE");
-                } else if (jsonArray.get(0).toString().equals("TRUE")) {
-                    editor.putString("uid", result);
-                    editor.putString("isLogin", "TRUE");
-                } else {
-                    Log.i("异常:--->","登录返回值不为TRUE或FALSE");
-                }
-                editor.commit();
+                try {
+                    JSONArray jsonArray = JSON.parseArray(result);
+                    SharedPreferences.Editor editor = sp.edit();
+                    Log.i("jsonArray的值:",jsonArray.get(0).toString());
+                    if (jsonArray.get(0).toString().equals("FALSE")) {
+                        editor.putString("isLogin","FALSE");
+                    } else if (jsonArray.get(0).toString().equals("TRUE")) {
+                        HafuUserComment hafuUserComment = JSON.parseObject(jsonArray.get(1).toString(),HafuUserComment.class);
+                        editor.putString("uid", hafuUserComment.getUid().toString());
+                        editor.putString("regtime",hafuUserComment.getRegtime().toString());
+                        editor.putString("regphone",hafuUserComment.getRegphone().toString());
+                        editor.putString("icon",hafuUserComment.getIcon());
+                        editor.putString("mainAddress",Integer.toString(hafuUserComment.getMainAddress()));
+                        editor.putString("isLogin", "TRUE");
+                    } else {
+                        Log.i("异常:--->","登录返回值不为TRUE或FALSE");
+                    }
+                    editor.commit();
 
-                String isLogin = sp.getString("isLogin","");
-                Log.i("isLogin = ",isLogin);
-                if (isLogin.equals("TRUE")) {
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                } else if (isLogin.equals("FALSE")) {
-                    Toast.makeText(LoginActivity.this,"用户名或密码错误",Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.i("ERROR ====>","缓存中isLogin字段错误");
+                    String isLogin = sp.getString("isLogin","");
+                    Log.i("isLogin = ",isLogin);
+                    if (isLogin.equals("TRUE")) {
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    } else if (isLogin.equals("FALSE")) {
+                        Toast.makeText(LoginActivity.this,"用户名或密码错误",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.i("ERROR ====>","缓存中isLogin字段错误");
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(LoginActivity.this,"服务器错误，请联系hafu小组",Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
+
             }
             else if (msg.what == 2) {
                 String result = (String) msg.obj;
@@ -190,32 +202,6 @@ public class LoginActivity extends Activity {
                 String s = response.body().string();
                 Message message = new Message();
                 message.what = 1;
-                message.obj = s;
-                handler.sendMessage(message);
-            }
-        });
-    }
-
-    private void getUserProfile() {
-        FormBody.Builder builder1 = new FormBody.Builder();
-        FormBody formBody = builder1.add("uid",sp.getString("uid","")).build();
-
-        Request.Builder builder = new Request.Builder();
-        Request request = builder.url("http://"+getString(R.string.ip)+":8080/hafu_project/get_user_base_profile")
-                .post(formBody)
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.i("获取用户信息请求异常：","--->"+e);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Log.i("获取用户信息请求成功","");
-                String s = response.body().string();
-                Message message = new Message();
-                message.what = 2;
                 message.obj = s;
                 handler.sendMessage(message);
             }

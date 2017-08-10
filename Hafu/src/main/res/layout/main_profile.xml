@@ -28,7 +28,7 @@
             android:layout_height="80dp"
             app:outCircleWidth="5dp"
             app:outCircleColor="#990066"
-            android:src="@drawable/icon_test2"
+            android:src="@drawable/icon_test1"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp" />
 
