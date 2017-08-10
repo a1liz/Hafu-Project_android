@@ -1,6 +1,7 @@
 package com.hafu.Hafu.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
@@ -9,13 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hafu.Hafu.R;
+import com.hafu.Hafu.RadioButtonAdapter;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -34,6 +38,9 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 @ContentView(R.layout.activity_address)
 public class AddressActivity extends Activity {
@@ -92,6 +99,25 @@ public class AddressActivity extends Activity {
         });
     }
 
+    private void saveExec(Request request) {
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.i("获取设置默认地址请求异常：","-->"+e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.i("获取设置默认地址请求成功：","--->");
+                String s = response.body().string();
+                Message message = new Message();
+                message.what = 2;
+                message.obj = s;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -100,7 +126,7 @@ public class AddressActivity extends Activity {
                 JSONObject[] hafuUserProfileComments = null;
                 int length = -1;
                 String result = (String) msg.obj;
-                //Log.i("地址传入值：",result);
+                Log.i("地址传入值：",result);
                 try {
                     JSONArray jsonArray = JSONArray.parseArray(result);
                     if (jsonArray.get(0).toString().equals("TRUE")) {
@@ -114,7 +140,7 @@ public class AddressActivity extends Activity {
                         length = 0;
                     } else {
                         Log.i("服务器传入地址异常,","需查看错误代码");
-                        Toast.makeText(AddressActivity.this,"服务器传入地址异常,需查看错误代码",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddressActivity.this,"服务器传入地址异常,请联系Hafu小组",Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -129,28 +155,62 @@ public class AddressActivity extends Activity {
                     map.put("name",hafuUserProfileComments[i].get("name"));
                     map.put("phone",hafuUserProfileComments[i].get("phone"));
                     map.put("address",hafuUserProfileComments[i].get("address"));
-                    map.put("pid",hafuUserProfileComments[i].get("pid"));
-
+                    map.put("pid",String.valueOf(hafuUserProfileComments[i].get("pid")));
+                    //Log.i("产生mainAddress","==>"+map.get("pid")+"=?="+sp.getString("mainAddress","")+"===>"+map.get("pid").equals(sp.getString("mainAddress","")));
+                    if (map.get("pid").equals(sp.getString("mainAddress",""))) {
+                        map.put("isPrimaryAddress",TRUE);
+                    } else {
+                        map.put("isPrimaryAddress",FALSE);
+                    }
                     lists.add(map);
                 }
 
-                String[] key = {"name","phone","address","pid"};
-                int[] ids = {R.id.name,R.id.phonenuber,R.id.address,R.id.pid};
-                SimpleAdapter hafuAdapter = new SimpleAdapter(AddressActivity.this,lists,R.layout.detail_address_item,key,ids);
-
-                address_list.setAdapter(hafuAdapter);
-                address_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    }
-                });
+                //Log.i("当前map值","==>"+lists.toString());
+                String[] key = {"name","phone","address","pid","isPrimaryAddress"};
+                int[] ids = {R.id.name,R.id.phonenumber,R.id.address,R.id.pid,R.id.isPrimaryAddress};
+                RadioButtonAdapter radioButtonAdapter = new RadioButtonAdapter(AddressActivity.this,lists,R.layout.detail_address_item,key,ids);
+                address_list.setAdapter(radioButtonAdapter);
+            } else if (msg.what == 2) {
+                String result = (String) msg.obj;
+                //Log.i("设定默认地址返回值：","===>"+result);
+                if (result.equals("TRUE")) {
+                    Toast.makeText(AddressActivity.this,"设定默认地址成功",Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                } else if (result.equals("FALSE")) {
+                    Toast.makeText(AddressActivity.this,"设定默认地址失败,请重试",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddressActivity.this,"设定默认地址异常,请联系Hafu小组",Toast.LENGTH_SHORT).show();
+                }
             }
         }
     };
 
     public void back(View view) {
         onBackPressed();
+    }
+
+    public void save(View view) {
+        for (int i = 0; i < address_list.getCount(); i++) {
+            View Child = address_list.getChildAt(i);
+            RadioButton isPrimaryAddress = Child.findViewById(R.id.isPrimaryAddress);
+            if (isPrimaryAddress.isChecked()) {
+                String mainAddress = ((TextView) Child.findViewById(R.id.pid)).getText().toString();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("mainAddress",mainAddress);
+                editor.commit();
+                Log.i("mainAddress","===>"+sp.getString("mainAddress",""));
+                FormBody.Builder builder1 = new FormBody.Builder();
+                FormBody formBody = builder1.add("uid", sp.getString("uid",""))
+                        .add("mainAddress",mainAddress).build();
+
+
+                Request.Builder builder = new Request.Builder();
+                Request request = builder.url("http://" + getString(R.string.ip) + ":8080/hafu_project/set_primary_address")
+                        .post(formBody)
+                        .build();
+                saveExec(request);
+            }
+        }
     }
 
 }

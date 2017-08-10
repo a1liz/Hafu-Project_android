@@ -31,6 +31,19 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="保存"
+            android:textColor="#13beec"
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:background="@drawable/shadow"
+            android:clickable="true"
+            android:onClick="save"
+            />
     </RelativeLayout>
 
     <Button

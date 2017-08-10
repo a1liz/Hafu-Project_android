@@ -102,17 +102,6 @@ public class LoginActivity extends Activity {
                 }
 
             }
-            else if (msg.what == 2) {
-                String result = (String) msg.obj;
-                HafuUserComment hafuUserComment = JSON.toJavaObject(JSON.parseObject(result), HafuUserComment.class);
-                Log.i("JSON形式结果：",result);
-                Log.i("username: ",hafuUserComment.getUsername());
-                Log.i("regphone: ",hafuUserComment.getRegphone());
-                Log.i("icon: ",hafuUserComment.getIcon());
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString("userBaseProfile",result);
-                editor.commit();
-            }
         }
     };
     OkHttpClient okHttpClient = new OkHttpClient();
