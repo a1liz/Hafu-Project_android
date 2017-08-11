@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+    <View
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hafu.Hafu.view.CommonAnimation"
-    android:orientation="vertical"
-    android:background="#eeeeee">
-
-    <RelativeLayout
+    android:background="#66333333" />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="About US"
-            android:textSize="25dp"
-            android:textColor="#00eaff"
-            android:layout_centerInParent="true"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="About US"
+                android:textSize="25dp"
+                android:textColor="#00eaff"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="Hiragino Sans GB"
+                />
+        </RelativeLayout>
+        <com.hafu.Hafu.view.ImageViewPlus
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/hafu_logo"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"/>
+
+        <com.romainpiel.shimmer.ShimmerTextView
             android:layout_marginTop="20dp"
-            android:fontFamily="Hiragino Sans GB"
-            />
+            android:layout_marginBottom="50dp"
+            android:id="@+id/shimmer_mainname1"
+            android:text="@string/mainname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#444"
+            android:textSize="50sp"
+            android:layout_gravity="center"
+            style="@style/MyTextView"/>
 
-        <!--<Button-->
-        <!--android:id="@+id/forgetPassword"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:text="忘记密码?"-->
-        <!--android:textSize="15dp"-->
-        <!--android:textColor="#00eaff"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--/>-->
-    </RelativeLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@drawable/hafu_logo"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"/>
 
-    <com.romainpiel.shimmer.ShimmerTextView
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"
-        android:id="@+id/shimmer_mainname1"
-        android:text="@string/mainname"
+        <com.romainpiel.shimmer.ShimmerTextView
+            android:id="@+id/shimmer_mainname2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="15sp"
+            android:text="”饿死了么“是由”hafuhafu工作室“制作的面向高收入人群的网上订餐平台，“饿死了么”为您精选多种高档商家，在营养、便捷、美味等多方面做到最好，以满足您精神和物质的双重需要。"/>
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="hafuhafu工作室"
+            android:textColor="#fffff1"/>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="成员:丁凡、王理治"
+            android:textColor="#fffff1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#444"
-        android:textSize="50sp"
-        android:layout_gravity="center"
-        style="@style/MyTextView"/>
+        android:orientation="horizontal"
+        android:visibility="gone"></LinearLayout>
 
 
-    <com.romainpiel.shimmer.ShimmerTextView
-        android:id="@+id/shimmer_mainname2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="15sp"
-        android:text="”饿死了么“是由”hafuhafu工作室“制作的面向高收入人群的网上订餐平台，“饿死了么”为您精选多种高档商家，在营养、便捷、美味等多方面做到最好，以满足您精神和物质的双重需要。"/>
-    <TextView
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="hafuhafu工作室
-成员:丁凡、王理治"/>
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" -->
-    <!--android:text="hafuhafu在这里给大家拜个早年"-->
-    <!--android:layout_gravity="center"/>-->
-</LinearLayout>
+</FrameLayout>

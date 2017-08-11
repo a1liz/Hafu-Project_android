@@ -203,7 +203,8 @@
         android:layout_height="45dp"
         android:clickable="true"
         android:background="@drawable/shadow"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:onClick="about_us">
         <ImageView
             android:layout_width="20dp"
             android:layout_height="30dp"

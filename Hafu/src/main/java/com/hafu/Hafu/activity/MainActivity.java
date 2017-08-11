@@ -43,6 +43,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hafu.Hafu.HafuAdapter;
 import com.hafu.Hafu.ImageService;
 import com.hafu.Hafu.R;
+import com.hafu.Hafu.view.BasicPopupWindow;
 import com.hafu.Hafu.view.CircleImageView;
 
 import org.xutils.view.annotation.ViewInject;
@@ -80,6 +81,7 @@ public class MainActivity extends Activity {
 
     private LinearLayout layout_all;
     protected int mScreenWidth;
+    private BasicPopupWindow basicPopupWindow;
 
     /**
      * 定义三种状态
@@ -136,6 +138,8 @@ public class MainActivity extends Activity {
         String user = sp.getString("username","");
         String isLogin = sp.getString("isLogin","");
 //        mTextMessage.setText(user+isLogin);
+
+        basicPopupWindow = new BasicPopupWindow(MainActivity.this);
 
 
         // 引入底部导航栏
@@ -350,6 +354,11 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this,AddressActivity.class);
         startActivity(intent);
     }
+
+    public void about_us(View view) {
+        basicPopupWindow.showPopupWindow(view);
+    }
+
 
     // 头像选择部分
     PopupWindow avatorPop;
