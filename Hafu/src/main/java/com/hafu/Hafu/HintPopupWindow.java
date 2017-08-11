@@ -185,10 +185,17 @@ public class HintPopupWindow {
                 int[] arr = new int[2];
                 locationView.getLocationOnScreen(arr);
                 linearLayout.measure(0, 0);
+
+
                 Rect frame = new Rect();
                 activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);//得到状态栏高度
                 float x = arr[0] + locationView.getWidth() - linearLayout.getMeasuredWidth();
                 float y = arr[1] - frame.top + locationView.getHeight();
+                if (x + linearLayout.getMeasuredWidth() > locationView.getRootView().getWidth()) {
+                    x = locationView.getRootView().getWidth() - linearLayout.getMeasuredWidth();
+                } else if (y + linearLayout.getMeasuredHeight() > locationView.getRootView().getHeight() - 250) {
+                    y = locationView.getRootView().getHeight() - linearLayout.getMeasuredHeight() - 250;
+                }
                 linearLayout.setX(x);
                 linearLayout.setY(y);
 

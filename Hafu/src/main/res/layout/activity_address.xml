@@ -51,7 +51,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="增加新地址"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:onClick="addAddress"
+        android:background="@drawable/add_address_btn"/>
     <ListView
         android:id="@+id/address_list"
         android:layout_width="wrap_content"

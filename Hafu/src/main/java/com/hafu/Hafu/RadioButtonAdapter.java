@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hafu.Hafu.activity.AddressActivity;
 
@@ -110,6 +111,15 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
             }
         });
 
+        LinearLayout delete_btn = v.findViewById(R.id.delete_btn);
+        delete_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mData.remove(position);
+                RadioButtonAdapter.this.notifyDataSetChanged();
+            }
+        });
+
         final RadioButton radio=(RadioButton) v.findViewById(R.id.isPrimaryAddress);
         holder.isPrimaryAddress = radio;
         holder.address_item = v.findViewById(R.id.address_item);
@@ -121,18 +131,24 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
 
                 //Log.i("设定默认地址为:","==>" + Integer.toString(position));
                 //重置，确保最多只有一项被选中
-                for(String key:states.keySet()){
-                    states.put(key, false);
+                if (Integer.valueOf(mData.get(position).get("pid").toString()) < 0) {
+                    Toast.makeText(v.getRootView().getContext(),"请保存后再设置默认地址",Toast.LENGTH_SHORT).show();
+                    RadioButtonAdapter.this.notifyDataSetChanged();
                 }
+                else {
+                    for (String key : states.keySet()) {
+                        states.put(key, false);
+                    }
 
-                states.put(String.valueOf(position), radio.isChecked());
-                RadioButtonAdapter.this.notifyDataSetChanged();
-                for (int i = 0; i < mData.size(); i++) {
-                    //Log.i("state.get(",i+") = " + states.get(String.valueOf(i)));
-                    mData.get(i).put("isPrimaryAddress",states.get(String.valueOf(i)));
-                }
+                    states.put(String.valueOf(position), radio.isChecked());
+                    RadioButtonAdapter.this.notifyDataSetChanged();
+                    for (int i = 0; i < mData.size(); i++) {
+                        //Log.i("state.get(",i+") = " + states.get(String.valueOf(i)));
+                        mData.get(i).put("isPrimaryAddress", states.get(String.valueOf(i)));
+                    }
 //                Log.i("states","===>"+states.toString());
-                //Log.i("data","===>"+mData.toString());
+                    //Log.i("data","===>"+mData.toString());
+                }
             }
         });
 

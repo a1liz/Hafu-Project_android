@@ -52,6 +52,7 @@ public class AddressActivity extends Activity {
     private ListView add_address;
     SharedPreferences sp;
     static public HintPopupWindow hintPopupWindow;
+    private int newAddressNum = 0;
     private JSONObject[] hafuUserProfileComments = null;
 
 
@@ -204,16 +205,22 @@ public class AddressActivity extends Activity {
                 editor.putString("mainAddress",mainAddress);
                 editor.commit();
                 List<Map<String,Object>> mapList = ((RadioButtonAdapter)address_list.getAdapter()).getMapList();
+                hafuUserProfileComments = new JSONObject[mapList.size()];
                 JSONArray jsonArray = new JSONArray();
                 for(i = 0; i < mapList.size(); i++) {
+                    hafuUserProfileComments[i] = new JSONObject();
                     hafuUserProfileComments[i].put("name",mapList.get(i).get("name"));
                     hafuUserProfileComments[i].put("phone",mapList.get(i).get("phone"));
                     hafuUserProfileComments[i].put("address",mapList.get(i).get("address"));
-                    hafuUserProfileComments[i].put("pid",Integer.valueOf(mapList.get(i).get("pid").toString()));
+                    if (Integer.valueOf(mapList.get(i).get("pid").toString()) < 0) {
+                        hafuUserProfileComments[i].put("pid","");
+                    } else {
+                        hafuUserProfileComments[i].put("pid", mapList.get(i).get("pid").toString());
+                    }
                     jsonArray.add(hafuUserProfileComments[i]);
                 }
 
-                Log.i("mainAddress","===>"+sp.getString("mainAddress",""));
+                Log.i("地址保存值","===>"+jsonArray.toString());
                 FormBody.Builder builder1 = new FormBody.Builder();
                 FormBody formBody = builder1.add("uid", sp.getString("uid",""))
                         .add("mainAddress",mainAddress)
@@ -227,6 +234,18 @@ public class AddressActivity extends Activity {
                 saveExec(request);
             }
         }
+    }
+
+    public void addAddress(View view) {
+        List<Map<String,Object>> mapList = ((RadioButtonAdapter)address_list.getAdapter()).getMapList();
+        Map<String,Object> map = new HashMap<>();
+        map.put("name","");
+        map.put("phone","");
+        map.put("address","");
+        map.put("pid",Integer.toString(-1-newAddressNum--));
+        map.put("isPrimaryAddress",FALSE);
+        mapList.add(map);
+        ((RadioButtonAdapter)address_list.getAdapter()).update(mapList);
     }
 
 }

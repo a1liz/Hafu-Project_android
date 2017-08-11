@@ -47,7 +47,8 @@
                 android:text="姓名"
                 android:textSize="10pt"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:hint="请填写真实姓名"/>
             <EditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
@@ -55,16 +56,19 @@
                 android:textSize="8pt"
                 android:inputType="text"
                 android:maxLines="1"
-                android:text="地址" />
+                android:text="地址"
+                android:hint="请填写详细地址"/>
             <EditText
                 android:id="@+id/phonenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="187****2381"
+                android:maxLength="11"
                 android:textSize="9pt"
                 android:textStyle="bold"
                 android:inputType="text"
                 android:maxLines="1"
+                android:hint="请填写电话号码"
                 />
         </LinearLayout>
 
