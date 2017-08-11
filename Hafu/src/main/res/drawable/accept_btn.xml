@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:useLevel="false">
+    <solid android:color="@color/colorAccent"/>
+    <corners android:topLeftRadius="3dip"
+        android:topRightRadius="3dip"
+        android:bottomRightRadius="3dip"
+        android:bottomLeftRadius="3dip" />
+    <!--圆角矩形白色背景-->
+    <!--<padding android:left="1dp"-->
+    <!--android:right="1dp"-->
+    <!--android:bottom="1dp"/>-->
+
+    <!--边框宽度-->
+    <size android:width="100dp"
+        android:height="100dp"
+        />
+    <!--边框-->
+</shape>

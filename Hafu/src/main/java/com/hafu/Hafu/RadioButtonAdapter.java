@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Checkable;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.hafu.Hafu.activity.AddressActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,6 +101,14 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
             v = convertView;
             holder = (ViewHolder) convertView.getTag();
         }
+
+        LinearLayout edit_btn = v.findViewById(R.id.edit_btn);
+        edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddressActivity.hintPopupWindow.showPopupWindow(view,position);
+            }
+        });
 
         final RadioButton radio=(RadioButton) v.findViewById(R.id.isPrimaryAddress);
         holder.isPrimaryAddress = radio;
@@ -362,5 +373,13 @@ public class RadioButtonAdapter extends BaseAdapter implements Filterable {
         LinearLayout address_item;
     }
 
+    public void update(List<Map<String,Object>> data){
+        mData = data;
+        RadioButtonAdapter.this.notifyDataSetChanged();
+    }
+
+    public List<Map<String,Object>> getMapList() {
+        return mData;
+    }
 }
 

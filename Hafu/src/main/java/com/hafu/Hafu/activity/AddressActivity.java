@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hafu.Hafu.HintPopupWindow;
 import com.hafu.Hafu.R;
 import com.hafu.Hafu.RadioButtonAdapter;
 
@@ -50,6 +51,9 @@ public class AddressActivity extends Activity {
     @ViewInject(R.id.add_address)
     private ListView add_address;
     SharedPreferences sp;
+    static public HintPopupWindow hintPopupWindow;
+    private JSONObject[] hafuUserProfileComments = null;
+
 
     OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -123,7 +127,6 @@ public class AddressActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.what == 1) {
-                JSONObject[] hafuUserProfileComments = null;
                 int length = -1;
                 String result = (String) msg.obj;
                 Log.i("地址传入值：",result);
@@ -168,8 +171,10 @@ public class AddressActivity extends Activity {
                 //Log.i("当前map值","==>"+lists.toString());
                 String[] key = {"name","phone","address","pid","isPrimaryAddress"};
                 int[] ids = {R.id.name,R.id.phonenumber,R.id.address,R.id.pid,R.id.isPrimaryAddress};
+                hintPopupWindow = new HintPopupWindow(AddressActivity.this,lists,key,ids);
                 RadioButtonAdapter radioButtonAdapter = new RadioButtonAdapter(AddressActivity.this,lists,R.layout.detail_address_item,key,ids);
                 address_list.setAdapter(radioButtonAdapter);
+
             } else if (msg.what == 2) {
                 String result = (String) msg.obj;
                 //Log.i("设定默认地址返回值：","===>"+result);
@@ -198,10 +203,21 @@ public class AddressActivity extends Activity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("mainAddress",mainAddress);
                 editor.commit();
+                List<Map<String,Object>> mapList = ((RadioButtonAdapter)address_list.getAdapter()).getMapList();
+                JSONArray jsonArray = new JSONArray();
+                for(i = 0; i < mapList.size(); i++) {
+                    hafuUserProfileComments[i].put("name",mapList.get(i).get("name"));
+                    hafuUserProfileComments[i].put("phone",mapList.get(i).get("phone"));
+                    hafuUserProfileComments[i].put("address",mapList.get(i).get("address"));
+                    hafuUserProfileComments[i].put("pid",Integer.valueOf(mapList.get(i).get("pid").toString()));
+                    jsonArray.add(hafuUserProfileComments[i]);
+                }
+
                 Log.i("mainAddress","===>"+sp.getString("mainAddress",""));
                 FormBody.Builder builder1 = new FormBody.Builder();
                 FormBody formBody = builder1.add("uid", sp.getString("uid",""))
-                        .add("mainAddress",mainAddress).build();
+                        .add("mainAddress",mainAddress)
+                        .add("newAddress",jsonArray.toJSONString()).build();
 
 
                 Request.Builder builder = new Request.Builder();
